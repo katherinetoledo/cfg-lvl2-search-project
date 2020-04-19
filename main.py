@@ -1,2 +1,4 @@
 #this is the beginning of our code
-print ("hello")
+name = "Zsuzsanna"
+print (
+    name)
