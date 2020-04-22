@@ -52,11 +52,11 @@ def run():
 
 
     with open ('recipes-list.txt', 'r') as recipes_file:
-        recipes-list = recipes_file.read()
-        recipes-list = recipes-list + ingredient + '' + recipe_search['recipe'] + recipe_search['label'] + recipe_search['url'] + '\n'
+        recipes_list = recipes_file.read()
+        recipes_list = recipes_list + ingredient + '' + recipe_search['recipe'] + recipe_search['label'] + recipe_search['url'] + '\n'
 
     with open ('recipes-list.txt', 'w+') as recipes_file:
-        recipes_file.write(recipes-list)
+        recipes_file.write(recipes_list)
 
 
 run()
