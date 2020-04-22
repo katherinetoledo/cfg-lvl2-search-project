@@ -1,4 +1,4 @@
-gitimport requests
+import requests
 
 def recipe_search(ingredient):
     app_id = '24dca7f7'
@@ -11,19 +11,23 @@ def run():
     ingredient = input('What ingredients would you like cooking?: ')
     results = recipe_search(ingredient)
 
-    with open('recipes-list.txt', 'r') as recipes_file:
-        recipes_list = recipes_file.read()
-        recipes_list = recipes_list + ingredient + '' + recipe_search['recipe'] + \
-                       recipe_search['label'] + recipe_search['url'] + '\n'
-
-    with open('recipes_list.txt', 'w+') as recipes_file:
-        recipes_file.write(recipes_list)
-
     for result in results:
         recipe = result['recipe']
         print(recipe['label'])
         print(recipe['url'])
         print()
+
+
+    with open('recipes_list.txt', 'r') as recipes_file:
+        recipes_list = recipes_file.read()
+        recipes_list += ingredient
+        for result in results:
+            recipe = result['recipe']
+            recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['url'] + '\n'
+
+    with open('recipes_list.txt', 'w+') as recipes_file:
+        recipes_file.write(recipes_list)
+
 
 run ()
 
