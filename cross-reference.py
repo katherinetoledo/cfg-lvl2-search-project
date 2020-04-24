@@ -15,6 +15,7 @@ def run():
         recipe = result['recipe']
         print(recipe['label'])
         print(recipe['url'])
+        print(recipe['ingredients'])
         print()
 
 
@@ -27,7 +28,5 @@ def run():
 
     with open('recipes_list.txt', 'w+') as recipes_file:
         recipes_file.write(recipes_list)
-
-
 
 run ()
