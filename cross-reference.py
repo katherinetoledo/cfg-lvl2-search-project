@@ -7,13 +7,6 @@ def recipe_search(ingredient):
     data = result.json()
     return data['hits']
 
-def nutrition (healthLabels):
-    app_id = '098cc3c5'
-    app_key = '35dcdb27fda166568ec4d287f553fb52'
-    result = requests.get('https://api.edamam.com/api/nutrition-details?app_id=098cc3c5&app_key=35dcdb27fda166568ec4d287f553fb52'.format(healthLabels, app_id, app_key))
-    data = result.json()
-    return data['hits']
-
 def run():
     ingredient = input('What ingredients would you like cooking? ')
     results = recipe_search(ingredient)
