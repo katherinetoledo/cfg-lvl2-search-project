@@ -11,7 +11,7 @@ def recipe_search(ingredient, diet):
 
 
 def get_ingredient():
-    result = input('What ingredient would you like to cook?:')
+    result = input('What ingredient would you like to cook?: ')
     return result
 
 
@@ -57,6 +57,9 @@ def run():
         recipe = result['recipe']
         print(recipe['label'])
         print(recipe['url'])
+        print(recipe['healthLabels'])
+        print('Calories: ' + str(round(recipe['calories'])) + ' kcal')
+        print()
 
     with open('recipes_list.txt', 'r') as recipes_file:
         recipes_list = recipes_file.read()
