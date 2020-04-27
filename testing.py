@@ -58,5 +58,15 @@ def run():
         print(recipe['label'])
         print(recipe['url'])
 
+    with open('recipes_list.txt', 'r') as recipes_file:
+        recipes_list = recipes_file.read()
+        recipes_list += ingredient
+        for result in results:
+            recipe = result['recipe']
+            recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['url'] + '\n'
+
+    with open('recipes_list.txt', 'w+') as recipes_file:
+        recipes_file.write(recipes_list)
+
 
 run()

@@ -1,8 +1,8 @@
 import requests
 
 def recipe_search(ingredient):
-    app_id = '66251a7b'
-    app_key = 'd4a212e9627ea62610fc7ce07eb8f34c'
+    app_id = '24dca7f7'
+    app_key = '41bb8956fc3d014759cc3f17edd941a5'
     result = requests.get('https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(ingredient, app_id, app_key))
     data = result.json()
     return data['hits']
@@ -27,7 +27,6 @@ def run():
 
     with open('recipes_list.txt', 'w+') as recipes_file:
         recipes_file.write(recipes_list)
-
 
 
 run ()
