@@ -1,62 +1,62 @@
 import requests
-import logging
-from py_edamam import PyEdamam
-
-# from py_edamam.exceptions import APIError, InvalidRecipeAPIKey
-
-logger = logging.getLogger('PyEdamam')
-
-def edamam(food):
-    e = PyEdamam(recipes_appid = '24dca7f7', recipes_appkey = '41bb8956fc3d014759cc3f17edd941a5')
-    for recipe in e.search_recipe(food):
-        return recipe, recipe.url
 
 
-def recipe_search(ingredient):
-    #url = 'https://api.edamam.com/search?q={query}&app_id={id}&app_key={key}'.format(query=ingredient, id=recipes_appid, key=recipes_appkey)
-    url = requests.get('https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(ingredient, app_id, app_key))
-    r = requests.get(url)
-    if r.status_code == 401:
-         logger.error('Invalid recipe API key')
-         raise InvalidRecipeApiKey
-    return r.json()
+def recipe_search(ingredient, diet):
+    app_id = '24dca7f7'
+    app_key = '41bb8956fc3d014759cc3f17edd941a5'
+    result = requests.get(
+        'https://api.edamam.com/search?q={}&diet={}&app_id={}&app_key={}'.format(ingredient, diet, app_id, app_key))
+    data = result.json()
+    return data['hits']
 
-    r = r.json()
-    if r.get("status") == "error":
-        error = r.get("message")
-        if not error:
-            error = "Api request failed"
-        logger.error(error)
-        raise APIError
-    return r
 
-def build_recipe_query(api_key, cuisine):
-    results = 'https://api.spoonacular.com/recipes/search?cuisine=' + cuisine + \
-          "&apiKey=" + api_key + "&addRecipeInformation=True"
-    r = requests.get(results)
+def get_ingredient():
+    result = input('What ingredient would you like to cook?:')
+    return result
 
-    if r.status_code == 401:
-        print("invalid recipe api key")
-        raise Exception
-    return r.json()
+
+def get_diet():
+    done = False
+    while not done:
+        print('What kind of diet are you on?\n'
+              'balanced\n'
+              'high protein\n'
+              'high-fiber\n'
+              'low-fat\n'
+              'low-carb\n'
+              'low-sodium\n')
+        diet = input('Type one of the options: ')
+        if diet != 'balanced' and diet != 'high protein' and diet != 'high-fiber' and diet != 'low-fat' and diet != 'low-carb' and diet != 'low-sodium':
+            print('Try again.')
+        else:
+            done = True
+
+    result = diet
+    if diet == '1':
+        result = 'balanced'
+    elif result == '2':
+        result = 'high-protein'
+    elif diet == '3':
+        result = 'high-fiber'
+    elif diet == '4':
+        result = 'low-fat'
+    elif diet == '5':
+        result = 'low-carb'
+    elif diet == '6':
+        result = 'low-sodium'
+
+    return result
+
 
 def run():
-    ingredient = input('What ingredients would you like cooking?: ')
-    results = recipe_search(ingredient)
+    ingredient = get_ingredient()
+    diet = get_diet()
+    results = recipe_search(ingredient, diet)
 
     for result in results:
         recipe = result['recipe']
         print(recipe['label'])
         print(recipe['url'])
-        print()
-
-
-    with open ('recipes-list.txt', 'r') as recipes_file:
-        recipes_list = recipes_file.read()
-        recipes_list = recipes_list + ingredient + '' + recipe_search['recipe'] + recipe_search['label'] + recipe_search['url'] + '\n'
-
-    with open ('recipes-list.txt', 'w+') as recipes_file:
-        recipes_file.write(recipes_list)
 
 
 run()
