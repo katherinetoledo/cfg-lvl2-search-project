@@ -1,15 +1,95 @@
 import requests
 
-url = 'https://api.edamam.com/search?q=cheese&app_id=2ab24719&app_key=b72191d1937d2cfa6ccc312e1b7f12e1'
-requests.get(url)
+def recipe_search(ingredient, diet):
+    app_id = '24dca7f7'
+    app_key = '41bb8956fc3d014759cc3f17edd941a5'
+    result = requests.get('https://api.edamam.com/search?q={}&diet={}&app_id={}&app_key={}'.format(ingredient, diet, app_id, app_key))
+    data = result.json()
+    return data['hits']
 
-#ask user what they ingredient they are searching for
+def get_ingredient():
+    result = input('What ingredient would you like to cook?:')
+    return result
 
-user_question = input('What ingredient are looking for?')
-print(user_question)
+def get_diet():
+    done = False
+    while not done:
+        print('What kind of diet are you on?\n'
+              'balanced\n'
+              'high protein\n'
+              'high-fiber\n'
+              'low-fat\n'
+              'low-carb\n'
+              'low-sodium\n')
+        diet = input('Type one of the options: ')
+        if diet != 'balanced' and diet != 'high protein' and diet != 'high-fiber' and diet != 'low-fat' and diet != 'low-carb' and diet != 'low-sodium':
+            print('Try again.')
+        else:
+            done = True
 
-# Create a function that makes a request to the Edamam API with the required ingredient aspart of the search query
+    result = diet
+    if diet == '1':
+        result = 'balanced'
+    elif result == '2':
+        result = 'high-protein'
+    elif diet == '3':
+        result = 'high-fiber'
+    elif diet == '4':
+        result = 'low-fat'
+    elif diet == '5':
+        result = 'low-carb'
+    elif diet == '6':
+        result = 'low-sodium'
+      
+    return result
 
-url = 'https://api.edamam.com/search?q=cheese&app_id=2ab24719&app_key=b72191d1937d2cfa6ccc312e1b7f12e1'.format(user_question)
-response = requests.get(url)
-print(response)
+
+
+
+def run():
+    ingredient = get_ingredient()
+    diet = get_diet()
+    results = recipe_search(ingredient, diet)
+
+    for result in results:
+        recipe = result['recipe']
+        print(recipe['label'])
+        print(recipe['url'])
+        
+       
+run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
