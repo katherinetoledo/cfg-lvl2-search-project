@@ -20,13 +20,13 @@ def get_diet():
     while not done:
         print('What kind of diet are you on?\n'
               'balanced\n'
-              'high protein\n'
+              'high-protein\n'
               'high-fiber\n'
               'low-fat\n'
               'low-carb\n'
               'low-sodium\n')
         diet = input('Type one of the options: ')
-        if diet != 'balanced' and diet != 'high protein' and diet != 'high-fiber' and diet != 'low-fat' and diet != 'low-carb' and diet != 'low-sodium':
+        if diet != 'balanced' and diet != 'high-protein' and diet != 'high-fiber' and diet != 'low-fat' and diet != 'low-carb' and diet != 'low-sodium':
             print('Try again.')
         else:
             done = True
@@ -63,7 +63,7 @@ def run():
 
     with open('recipes_list.txt', 'r') as recipes_file:
         recipes_list = recipes_file.read()
-        recipes_list += ingredient
+        recipes_list += 'Ingredient: ' + ingredient + '\n' + 'Diet: ' + diet + '\n'
         for result in results:
             recipe = result['recipe']
             recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['url'] + '\n'
