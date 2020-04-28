@@ -66,8 +66,8 @@ def run():
         recipes_list += 'Ingredient: ' + ingredient + '\n' + 'Diet: ' + diet + '\n'
         for result in results:
             recipe = result['recipe']
-            recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['url'] + '\n'
-
+            recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['healthLabels'] + '\n' + recipe['url'] + '\n'
+            recipes_file.write
     with open('recipes_list.txt', 'w+') as recipes_file:
         recipes_file.write(recipes_list)
 
