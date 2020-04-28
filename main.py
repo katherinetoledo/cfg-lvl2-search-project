@@ -1,5 +1,5 @@
 import requests
-
+import json
 
 def recipe_search(ingredient, diet):
     app_id = '24dca7f7'
@@ -61,15 +61,22 @@ def run():
         print('Calories: ' + str(round(recipe['calories'])) + ' kcal')
         print()
 
+    with open('recipes_list.txt', 'a') as recipes_file:
+        recipes_file.write('\nRecipe Search\n')
+
     with open('recipes_list.txt', 'r') as recipes_file:
         recipes_list = recipes_file.read()
         recipes_list += 'Ingredient: ' + ingredient + '\n' + 'Diet: ' + diet + '\n'
         for result in results:
             recipe = result['recipe']
-            recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['healthLabels'] + '\n' + recipe['url'] + '\n'
+            recipes_list = recipes_list + '\n' + recipe['label'] + '\n' + recipe['url'] + '\n\n'
             recipes_file.write
+
     with open('recipes_list.txt', 'w+') as recipes_file:
         recipes_file.write(recipes_list)
+
+    with open('recipes_list.txt', 'a') as recipes_file:
+        recipes_file.write('Enjoy :)\n')
 
 
 run()
