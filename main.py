@@ -14,8 +14,8 @@ def get_ingredient():
     potential_ingredient = input(
         "Alright, is there anything else you would like to include on your ingredient list?(y/n)")
     if potential_ingredient == "y":
-        additionals = input("What shall it be?")
-        result == result + potential_ingredient
+        additionals = input("What shall it be? ")
+        result == result + additionals
         print("Great, let's see what we can do with {} and {}!".format(result, additionals))
     else:
         print("Alright, looks like we can work with {}.".format(result))
