@@ -54,9 +54,9 @@ def run():
 
     for result in results:
         recipe = result['recipe']
-        print(recipe['label'])
-        print(recipe['url'])
-        print(recipe['healthLabels'])
+        print('Name: ' + recipe['label'])
+        print('URL: ' + recipe['url'])
+        print('Health Labels: ' + str(recipe['healthLabels']))
         print('Calories: ' + str(round(recipe['calories'])) + ' kcal')
         print()
 
